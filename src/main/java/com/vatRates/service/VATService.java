@@ -4,6 +4,7 @@ package com.vatRates.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.vatRates.model.CountryVatRate;
 import com.vatRates.util.JsonDeserializer;
+import com.vatRates.util.VatRateCache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -22,18 +23,27 @@ public class VATService {
     private final RestTemplate restTemplate;
     private static final String uri = "https://euvatrates.com/rates.json";
 
+    private final VatRateCache vatRateCache;
 
     @Autowired
-    public VATService( RestTemplate restTemplate, JsonDeserializer jsonDeserializer) {
+    public VATService(JsonDeserializer jsonDeserializer, RestTemplate restTemplate, VatRateCache vatRateCache) {
         this.jsonDeserializer = jsonDeserializer;
         this.restTemplate = restTemplate;
+        this.vatRateCache = vatRateCache;
     }
+
 
     public Map<String, CountryVatRate> apiData() throws JsonProcessingException {
 
-        ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
+        Map<String, CountryVatRate> rates = vatRateCache.getVatRates();
+        if (rates != null) {
+            return rates;
+        }
 
-        return jsonDeserializer.deserializedRates(response.getBody()).rates();
+        ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
+        rates = jsonDeserializer.deserializedRates(response.getBody()).rates();
+        vatRateCache.putVatRates(rates);
+        return rates;
     }
     public List<CountryVatRate> topThreeStandardRates() throws JsonProcessingException {
         Map<String, CountryVatRate> rates = apiData();
