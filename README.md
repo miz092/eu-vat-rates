@@ -55,13 +55,14 @@ mvn spring-boot:run
 
 ## API endpoints
 Browser: 
-[Top standard rates](http://localhost:8080/euvat/topstandardrates)
 
+[Top standard rates](http://localhost:8080/euvat/topstandardrates)
 [Lowest reduced rates](http://localhost:8080/euvat/lowestreducedrates)
 
 # Connect to the API using Postman on 'localhost:8080'
 
   | GET | /euvat/topstandardrates | To retrieve 3 top standard rates |
+
   | GET | /euvat/lowestreducedrates | To retrieve 3 lowest reduced rates|
 
 ### Author
