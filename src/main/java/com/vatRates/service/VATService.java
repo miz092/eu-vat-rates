@@ -9,7 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class VATService {
@@ -26,13 +29,39 @@ public class VATService {
         this.restTemplate = restTemplate;
     }
 
-    public String apiData() throws JsonProcessingException {
+    public Map<String, CountryVatRate> apiData() throws JsonProcessingException {
 
         ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
-        Map<String, CountryVatRate> rates =jsonDeserializer.deserializedRates(response.getBody()).rates();
-        System.out.println(rates);
-        return response.getBody();
+
+        return jsonDeserializer.deserializedRates(response.getBody()).rates();
     }
+    public List<CountryVatRate> topThreeStandardRates() throws JsonProcessingException {
+        Map<String, CountryVatRate> rates = apiData();
+
+        return rates
+                .values()
+                .stream()
+                .filter(countryVatRate -> countryVatRate.getIsoDuplicateOf() == null)
+                .sorted(Comparator.comparingDouble(CountryVatRate::getStandardRate).reversed())
+                .limit(3)
+                .collect(Collectors.toList());
+
+    }
+    public List<CountryVatRate> lowestReducedRates() throws JsonProcessingException {
+
+        Map<String, CountryVatRate> rates = apiData();
+
+        return rates
+                .values()
+                .stream()
+                .filter(countryVatRate -> countryVatRate.getIsoDuplicateOf() == null)
+                .filter(countryVatRate -> countryVatRate.getReducedRate() != null)
+                .sorted(Comparator.comparingDouble(CountryVatRate::getReducedRate))
+                .limit(3)
+                .collect(Collectors.toList());
+    }
+
+
 
 
 }
