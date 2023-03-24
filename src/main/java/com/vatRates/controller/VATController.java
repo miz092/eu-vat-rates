@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.vatRates.model.CountryVatRate;
 import com.vatRates.service.VATService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,6 +29,10 @@ public class VATController {
         return vatService.lowestReducedRates();
     }
 
-
+    @ExceptionHandler(JsonProcessingException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public String exceptionHandler(JsonProcessingException e){
+        return e.getMessage();
+    }
 
 }
