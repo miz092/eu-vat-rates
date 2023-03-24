@@ -73,6 +73,7 @@ mvn spring-boot:run
 
 ## API endpoints
 
+While the program runs, we can test/access the given endpoints in several ways:  
 
 ### From browser
 
@@ -86,7 +87,9 @@ mvn spring-boot:run
 
 ### Postman
 
-#### Connect to the API using Postman (or other API platform) on localhost:8080
+#### Connect to the API using Postman (or any other API platform) on localhost:8080
+
+Send a get request with the endpoints detailed below: 
 
 #### | GET | /euvat/topstandardrates | To retrieve 3 top standard rates |
 
