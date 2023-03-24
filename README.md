@@ -1,9 +1,20 @@
 ## EU VAT rate API
 
+### Table of contents
+
 - [Introduction](#introduction)
 - [App structure](#structure)
 - [Installation](#installation)
 - [API endpoints](#api-endpoints)
+  - [Swagger UI](#swagger-ui)
+  - [From browser](#from-browser)
+  - [Postman](#postman)
+- [Author](#author)
+- [Contact](#contact)
+
+
+
+
 ## Introduction
 
 EU VAT Rate is a Spring Boot microservice that fetches VAT rates for EU countries from an external API (https://euvatrates.com/rates.json), caches the
@@ -11,6 +22,7 @@ data, and provides methods to retrieve the top three countries with the highest 
 rates.
 
 ## Structure
+
 ```text
 +---java
    \---com
@@ -39,12 +51,18 @@ rates.
 
 ## Installation
 
-Clone: 
+Cloning:
+
 ```shell
 git clone https://github.com/miz092/eu-vat-rates.git
 ```
 
+Go to the root of the file:
+```shell
+cd eu-vat-rates
+```
 Installation:
+
 ```shell
 mvn clean install 
 ```
@@ -54,16 +72,43 @@ mvn spring-boot:run
 ```
 
 ## API endpoints
-Browser: 
+
+
+### From browser
 
 [Top standard rates](http://localhost:8080/euvat/topstandardrates)
-[Lowest reduced rates](http://localhost:8080/euvat/lowestreducedrates)
 
-# Connect to the API using Postman on 'localhost:8080'
+[The 3 lowest reduced rates](http://localhost:8080/euvat/lowestreducedrates)
 
-  | GET | /euvat/topstandardrates | To retrieve 3 top standard rates |
+### Swagger UI
 
-  | GET | /euvat/lowestreducedrates | To retrieve 3 lowest reduced rates|
+[SwaggerUI](http://localhost:8080/swagger-ui/index.html)
+
+### Postman
+
+#### Connect to the API using Postman (or other API platform) on localhost:8080
+
+#### | GET | /euvat/topstandardrates | To retrieve 3 top standard rates |
+
+#### | GET | /euvat/lowestreducedrates | To retrieve 3 lowest reduced rates|
+
+## Technologies, libraries used
+
+#### Java 17
+#### Maven
+#### Spring Boot 
+#### Spring Boot Starter Web
+#### Spring Boot Starter Cache
+#### Project Lombok
+
+
 
 ### Author
+
 * [Zoltán Mihályfi](https://github.com/miz092)
+
+### Contact
+
+* [LinkedIn](https://www.linkedin.com/in/mi-zo/)
+* Email: mihalyfi.zoltan@gmail.com
+
