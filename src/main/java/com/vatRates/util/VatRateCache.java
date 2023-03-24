@@ -8,6 +8,7 @@ import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
+import java.util.Optional;
 
 
 @Component
@@ -20,12 +21,12 @@ public class VatRateCache {
         this.cache = cacheManager.getCache("vatRatesCache");
     }
 
-    public Map<String, CountryVatRate> getVatRates() {
+    public Optional<Map<String, CountryVatRate>> getVatRates() {
         Cache.ValueWrapper valueWrapper = cache.get("apiData");
         if (valueWrapper != null) {
-            return (Map<String, CountryVatRate>) valueWrapper.get();
+            return Optional.ofNullable((Map<String, CountryVatRate>) valueWrapper.get());
         }
-        return null;
+        return Optional.empty();
     }
 
     public void putVatRates(Map<String, CountryVatRate> vatRates) {

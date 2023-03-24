@@ -14,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,13 +38,13 @@ public class VATService {
 
     public Map<String, CountryVatRate> apiData() throws JsonProcessingException {
 
-        Map<String, CountryVatRate> rates = vatRateCache.getVatRates();
-        if (rates != null) {
-            return rates;
+        Optional<Map<String, CountryVatRate>> ratesOptional = vatRateCache.getVatRates();
+        if (ratesOptional.isPresent()) {
+            return ratesOptional.get();
         }
 
         ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
-        rates = jsonDeserializer.deserializedRates(response.getBody()).rates();
+        Map<String, CountryVatRate> rates = jsonDeserializer.deserializedRates(response.getBody()).rates();
         vatRateCache.putVatRates(rates);
         return rates;
     }
