@@ -23,10 +23,9 @@ public class VATService {
     private final JsonDeserializer jsonDeserializer;
 
     private final RestTemplate restTemplate;
+    private final VatRateCache vatRateCache;
     @Value("${euvat.api.uri}")
     private String uri;
-
-    private final VatRateCache vatRateCache;
 
     @Autowired
     public VATService(JsonDeserializer jsonDeserializer, RestTemplate restTemplate, VatRateCache vatRateCache) {
@@ -48,6 +47,7 @@ public class VATService {
         vatRateCache.putVatRates(rates);
         return rates;
     }
+
     public List<CountryVatRate> topThreeStandardRates() throws JsonProcessingException {
         Map<String, CountryVatRate> rates = apiData();
 
@@ -60,6 +60,7 @@ public class VATService {
                 .collect(Collectors.toList());
 
     }
+
     public List<CountryVatRate> lowestReducedRates() throws JsonProcessingException {
 
         Map<String, CountryVatRate> rates = apiData();
@@ -73,8 +74,6 @@ public class VATService {
                 .limit(3)
                 .collect(Collectors.toList());
     }
-
-
 
 
 }
