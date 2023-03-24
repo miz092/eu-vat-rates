@@ -6,6 +6,7 @@ import com.vatRates.model.CountryVatRate;
 import com.vatRates.util.JsonDeserializer;
 import com.vatRates.util.VatRateCache;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -21,7 +22,8 @@ public class VATService {
     private final JsonDeserializer jsonDeserializer;
 
     private final RestTemplate restTemplate;
-    private static final String uri = "https://euvatrates.com/rates.json";
+    @Value("${euvat.api.uri}")
+    private String uri;
 
     private final VatRateCache vatRateCache;
 

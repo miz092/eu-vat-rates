@@ -83,6 +83,8 @@ While the program runs, we can test/access the given endpoints in several ways:
 
 ### Swagger UI
 
+This link only works when the app is running: 
+
 [SwaggerUI](http://localhost:8080/swagger-ui/index.html)
 
 ### Postman
