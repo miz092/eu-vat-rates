@@ -1,4 +1,4 @@
-package com.vatRates.varateapp;
+package com.vatRates;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
