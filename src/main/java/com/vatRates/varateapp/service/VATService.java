@@ -2,6 +2,8 @@ package com.vatRates.varateapp.service;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.vatRates.varateapp.model.CountryVatRate;
+import com.vatRates.varateapp.util.JsonDeserializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -12,19 +14,23 @@ import java.util.Map;
 @Service
 public class VATService {
 
+    private final JsonDeserializer jsonDeserializer;
+
     private final RestTemplate restTemplate;
     private static final String uri = "https://euvatrates.com/rates.json";
 
 
     @Autowired
-    public VATService( RestTemplate restTemplate) {
+    public VATService( RestTemplate restTemplate, JsonDeserializer jsonDeserializer) {
+        this.jsonDeserializer = jsonDeserializer;
         this.restTemplate = restTemplate;
     }
 
-    public String apiData() {
+    public String apiData() throws JsonProcessingException {
 
         ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
-
+        Map<String, CountryVatRate> rates =jsonDeserializer.deserializedRates(response.getBody()).rates();
+        System.out.println(rates);
         return response.getBody();
     }
 

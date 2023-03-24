@@ -1,12 +1,15 @@
 package com.vatRates.varateapp.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.vatRates.varateapp.util.CountryVatRateDeserializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonDeserialize(using = CountryVatRateDeserializer.class)
 public class CountryVatRate {
 
 
