@@ -21,12 +21,12 @@ public class VATController {
     }
 
     @GetMapping("/topstandardrates")
-    public String getTopVats() {
+    public String getTopVats() throws JsonProcessingException {
         return vatService.apiData();
     }
 
     @GetMapping("/lowestreducedrates")
-    public String getLowestReducedVats()   {
+    public String getLowestReducedVats() throws JsonProcessingException {
         return vatService.apiData();
     }
 
