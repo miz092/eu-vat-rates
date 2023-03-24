@@ -1,4 +1,4 @@
-package com.vatRates.varateapp;
+package com.vatRates;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

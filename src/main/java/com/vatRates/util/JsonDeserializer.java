@@ -1,10 +1,10 @@
-package com.vatRates.varateapp.util;
+package com.vatRates.util;
 
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vatRates.varateapp.model.VatRateWrapper;
+import com.vatRates.model.VatRateWrapper;
 import org.springframework.stereotype.Component;
 
 @Component

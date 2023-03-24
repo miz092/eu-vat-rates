@@ -1,11 +1,10 @@
-package com.vatRates.varateapp.util;
+package com.vatRates.util;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.vatRates.varateapp.model.CountryVatRate;
+import com.vatRates.model.CountryVatRate;
 
 import java.io.IOException;
 

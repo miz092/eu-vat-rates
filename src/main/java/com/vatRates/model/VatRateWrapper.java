@@ -1,4 +1,4 @@
-package com.vatRates.varateapp.model;
+package com.vatRates.model;
 
 import java.util.Map;
 

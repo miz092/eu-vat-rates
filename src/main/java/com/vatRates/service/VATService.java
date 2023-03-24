@@ -1,9 +1,9 @@
-package com.vatRates.varateapp.service;
+package com.vatRates.service;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.vatRates.varateapp.model.CountryVatRate;
-import com.vatRates.varateapp.util.JsonDeserializer;
+import com.vatRates.model.CountryVatRate;
+import com.vatRates.util.JsonDeserializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

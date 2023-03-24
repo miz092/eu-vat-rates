@@ -1,8 +1,8 @@
-package com.vatRates.varateapp.model;
+package com.vatRates.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.vatRates.varateapp.util.CountryVatRateDeserializer;
+import com.vatRates.util.CountryVatRateDeserializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
