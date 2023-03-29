@@ -2,6 +2,7 @@ package com.vatRates.service;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.vatRates.model.ApiDataEmptyException;
 import com.vatRates.model.CountryVatRate;
 import com.vatRates.util.JsonDeserializer;
 import com.vatRates.util.VatRateCache;
@@ -43,9 +44,18 @@ public class VATService {
         }
 
         ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
+
         Map<String, CountryVatRate> rates = jsonDeserializer.deserializedRates(response.getBody()).rates();
         vatRateCache.putVatRates(rates);
         return rates;
+    }
+
+
+    public void checkIfApiDataIsEmpty() throws ApiDataEmptyException, JsonProcessingException {
+        Map<String, CountryVatRate> rates = apiData();
+        if (rates.isEmpty()) {
+            throw new ApiDataEmptyException("API data is empty");
+        }
     }
 
     public List<CountryVatRate> topThreeStandardRates() throws JsonProcessingException {

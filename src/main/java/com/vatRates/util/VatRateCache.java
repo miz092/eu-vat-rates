@@ -34,6 +34,7 @@ public class VatRateCache {
     }
 
     public void clearCache() {
+
         cache.clear();
     }
 }

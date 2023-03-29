@@ -25,7 +25,7 @@ public class CountryVatRateDeserializer extends JsonDeserializer<CountryVatRate>
                 superReducedRate, parkingRate);
     }
 
-    private Double parseDoubleOrNull(JsonNode node, String fieldName) {
+    public Double parseDoubleOrNull(JsonNode node, String fieldName) {
         return node.get(fieldName).isDouble() ? node.get(fieldName).asDouble() : null;
     }
 }

@@ -5,10 +5,12 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.vatRates.util.CountryVatRateDeserializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
+
+import java.util.Objects;
+
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @JsonDeserialize(using = CountryVatRateDeserializer.class)
 public class CountryVatRate {
 
@@ -33,4 +35,29 @@ public class CountryVatRate {
 
     @JsonProperty("parking_rate")
     private Double parkingRate;
+
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CountryVatRate that = (CountryVatRate) o;
+        boolean isoDuplicateOfEqual = Objects.equals(isoDuplicateOf, that.isoDuplicateOf) ||
+                (isoDuplicateOf == null && "null".equals(that.isoDuplicateOf)) ||
+                (that.isoDuplicateOf == null && "null".equals(isoDuplicateOf));
+        return isoDuplicateOfEqual &&
+                Objects.equals(country, that.country) &&
+                Objects.equals(standardRate, that.standardRate) &&
+                Objects.equals(reducedRate, that.reducedRate) &&
+                Objects.equals(reducedRateAlt, that.reducedRateAlt) &&
+                Objects.equals(superReducedRate, that.superReducedRate) &&
+                Objects.equals(parkingRate, that.parkingRate);
+    }
+
 }
+
+
+
+
+
