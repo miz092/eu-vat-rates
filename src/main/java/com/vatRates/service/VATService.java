@@ -51,12 +51,6 @@ public class VATService {
     }
 
 
-    public void checkIfApiDataIsEmpty() throws ApiDataEmptyException, JsonProcessingException {
-        Map<String, CountryVatRate> rates = apiData();
-        if (rates.isEmpty()) {
-            throw new ApiDataEmptyException("API data is empty");
-        }
-    }
 
     public List<CountryVatRate> topThreeStandardRates() throws JsonProcessingException {
         Map<String, CountryVatRate> rates = apiData();
